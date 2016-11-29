@@ -1,8 +1,32 @@
 # PasswordGen
-Password/Passphrase generator in R based on Webster's Unabridged Dictionary
 
-To install in R run the following code:
-`install.packages('devtools')`
-`devtools::install_github("mpascariu/PasswordGen")`
+Sometimes we need not only secure passwords but also passwords easy to remember.
+PasswordGen is an R package the generates passwords/passphrases easy to remember with a 
+method based on dictionary method. 
+ 
+The default ```password()``` generates random passwords using words from 
+[The Project Gutenberg EBook of Webster's Unabridged Dictionary, 
+by Various](http://www.gutenberg.org/ebooks/29765). However, you can use the 
+```ExtractWords()``` function extract all the words from any book and use them 
+in the ```password()``` generator. Check the examples given in the help files.   
 
-Check the examples in the `password()` function.
+
+Installation
+============
+
+1. Make sure you have the most recent version of R
+2. Run the following code in your R console 
+
+```r
+# install.packages("devtools")
+
+library(devtools)
+install_github("mpascariu/PasswordGen")
+```
+
+Help
+===============
+All functions are documented in the standard way, which means that 
+once you load the package using ```library(PasswordGen)```
+you can just type ```?password``` to see the help file. 
+

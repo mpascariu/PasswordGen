@@ -1,4 +1,4 @@
-# #' PasswordGen: A package for generatin random secure and readable password 
+# #' PasswordGen: A package for generating random secure and readable password 
 # #' and passphrases using the dictionary method
 # #'
 # #' @docType package
