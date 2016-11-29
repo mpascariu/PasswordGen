@@ -1,6 +1,6 @@
 # Data in the package
 
-#' Words 
+#' Webster 
 #'
 #' A list extracted from Webster's Unabridged Dictionary
 #' 
@@ -12,4 +12,4 @@
 #' }
 #' @source The Project Gutenberg EBook of Webster's Unabridged Dictionary, by Various
 #' \url{http://www.gutenberg.org/ebooks/29765}
-'words'
+'Webster'

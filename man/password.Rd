@@ -5,7 +5,7 @@
 \title{Function to generate secure readable passwords/passphrases}
 \usage{
 password(no_words = 3, symbols = TRUE, numbers = TRUE, sep = NULL,
-  data = words)
+  data = Webster)
 }
 \arguments{
 \item{no_words}{- Number of words to be used in the password}
@@ -18,7 +18,9 @@ If TRUE random numbers between 100 and 999 are selected.}
 \item{sep}{- Specify the separator between the words. 
 If NULL a random symbol is selected.}
 
-\item{data}{- words to be used in the password}
+\item{data}{- words to be used in the password. In default mode the words from
+\href{http://www.gutenberg.org/ebooks/29765}{The Project Gutenberg EBook 
+of Webster's Unabridged Dictionary, by Various} are used (93077 words).}
 }
 \description{
 Function to generate secure readable passwords/passphrases
