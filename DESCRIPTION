@@ -1,13 +1,13 @@
 Package: PasswordGen
 Type: Package
 Title: PasswordGen: Generate readable secure password using the dictionary method
-Version: 0.0.2
+Version: 0.0.3
 Author: Marius Pascariu
-Maintainer: Marius Pascariu <wpascariu@outlook.com>
+Maintainer: Marius Pascariu <mpascariu@outlook.com>
 Description: Generate readable secure password using the dictionary method.
 License: GPL-2
 LazyData: TRUE
 Depends: R (>= 3.1.2)
 Imports: pbapply
 Suggests: 
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

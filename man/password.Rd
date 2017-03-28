@@ -13,7 +13,7 @@ password(no_words = 3, symbols = TRUE, numbers = TRUE, sep = NULL,
 \item{symbols}{- Do we want symbols in the password (TRUE/FALSE)?}
 
 \item{numbers}{- Do we want numbers in the password (TRUE/FALSE)? 
-If TRUE random numbers between 100 and 999 are selected.}
+If TRUE random numbers between 0 and 999 are selected.}
 
 \item{sep}{- Specify the separator between the words. 
 If NULL a random symbol is selected.}
@@ -37,4 +37,3 @@ password(2)
 password()
 
 }
-

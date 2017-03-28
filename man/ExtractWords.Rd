@@ -34,4 +34,3 @@ password(no_words = 7, numbers = FALSE, symbols = FALSE, sep = ' ',
          data = mywords)
 } 
 }
-
