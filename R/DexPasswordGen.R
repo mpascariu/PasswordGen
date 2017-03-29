@@ -22,9 +22,11 @@
 #' password()
 #' 
 #' @export
-password <- function(no_words = 3, symbols = TRUE, 
-                     numbers = TRUE, sep = NULL, data = Webster){
+password <- function(no_words = 3, 
+                     symbols = TRUE, numbers = TRUE, 
+                     sep = NULL, data = NULL){
   
+  if (is.null(data)) data = PasswordGen::Webster
   if (class(data) == 'ExtractWords') {data = data$words}
   # Words and symbols
   Symbols <- c('!', '#', '$', '%', '&', '+', 
@@ -62,47 +64,81 @@ simpleCap <- function(x) {
 #' 
 #' Function to extract words from a .txt file. For example a book from 
 #' Project Gutenberg \url{http://www.gutenberg.org/wiki/Main_Page}.
-#' @param file .txt file (say, your favorite book)
+#' @param data.txt a .txt file from your working directory (say, your favorite book)
+#' @param data.r a character string
 #' @param words.min.length The minimum legth of the words to be extracted. 
 #' Default value is 3.
 #' @examples
-#' \dontrun{
 #' library(PasswordGen)
 #' 
-#' # Specify the name of a file that you already saved in your workind directory
-#' mybook <- "Project Gutenberg's The Adventures of Sherlock Holmes, 
-#' by Arthur Conan Doyle.txt"
+#' # Using the \code{gutenbergr} R package we will download a book and 
+#' # extract words from it. Let's say, "The Adventures of Sherlock Holmes" by 
+#' # Doyle, Arthur Conan
 #' 
-#' # Extract the unique words
-#' mywords <- ExtractWords(file = mybook, words.min.length = 3)
+#' library(gutenbergr)
+#' library(stringr)
+#' # look up book and check the id on Gutenberg Project
+#' info <- gutenberg_works(str_detect(title, "The Adventures of Sherlock Holmes"))
+#' info$gutenberg_id # this should be 1661
 #' 
-#' # Generate password using my words from Sherlock Holmes book.
-#' password(data = mywords)
+#' # download the book
+#' my_book <- gutenberg_download(gutenberg_id = 1661, meta_fields = "title",
+#'                               mirror = "http://gutenberg.pglaf.org")
 #' 
-#' password(no_words = 7, numbers = FALSE, symbols = FALSE, sep = ' ',
-#'          data = mywords)
-#' } 
+#' # Extract words
+#' words <- ExtractWords(data.r = my_book$text)
+#' words
+#' 
+#' # Generate passwords
+#' password(no_words = 5, data = words)
+#' 
+#' 
+#' # -----------
+#' # Example 2 - Extract russian words and generate passwords
+#' 
+#' # check the id of the book on Gutenberg Project
+#' info <- gutenberg_works(languages = 'ru')
+#' info # let's take the first id: 5316
+#' 
+#' # download the book
+#' my_book <- gutenberg_download(gutenberg_id = 5316, meta_fields = "title",
+#'                               mirror = "http://gutenberg.pglaf.org")
+#' 
+#' # Extract words
+#' words <- ExtractWords(data.r = my_book$text)
+#' 
+#' password(no_words = 5, data = words,
+#'          numbers = FALSE, symbols = FALSE, sep = "-")
+#' 
 #' @export
-#' 
-ExtractWords <- function(file, words.min.length = 3) {
+ExtractWords <- function(data.txt = NULL, 
+                         data.r = NULL, 
+                         words.min.length = 3) {
   pb <- startpb(0, 3)
   on.exit(closepb(pb))
   
+  if (!is.null(data.r)) {
+    file_name = paste0(data.r[1],'.Rdata')
+    cat(data.r, file = file_name, sep = "\n")
+    file = file_name } 
+  else {file = data.txt}
+  
   conn  <- file(file, open = "r")
   linn  <- readLines(conn)
-  linn2 <- gsub('[^[:alpha:]]',' ', linn)
   close(conn)
+  linn1 <- unique(tolower(linn))
+  linn2 <- gsub('[^[:alpha:]]',' ', linn1)
   setpb(pb, 1)
-  
-  w  <- unlist(strsplit(linn2, split = ' '))
-  w_ <- unique(tolower(w)) # Convert all words to lowercase and remove duplicates
+  w  <- unique(unlist(strsplit(linn2, split = ' ')))
   setpb(pb, 2)
   
-  criteria <- apply(data.frame(w_), 1, 
-                    function(x) nchar(x)) > words.min.length
-  out <- list(file = file, words = sort(w_[criteria]))
+  criteria <- apply(data.frame(w), 1, 
+                    function(x) nchar(x)) >= words.min.length
+  out <- list(file = file, words = sort(w[criteria]))
   out_ <- structure(class = 'ExtractWords', out)
+  
   setpb(pb, 3)
+  if (!is.null(data.r)) file.remove(paste(file_name))
   return(out_)
 }
 

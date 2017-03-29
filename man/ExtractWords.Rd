@@ -4,10 +4,12 @@
 \alias{ExtractWords}
 \title{Function to extract words from a .txt file}
 \usage{
-ExtractWords(file, words.min.length = 3)
+ExtractWords(data.txt = NULL, data.r = NULL, words.min.length = 3)
 }
 \arguments{
-\item{file}{.txt file (say, your favorite book)}
+\item{data.txt}{a .txt file from your working directory (say, your favorite book)}
+
+\item{data.r}{a character string}
 
 \item{words.min.length}{The minimum legth of the words to be extracted. 
 Default value is 3.}
@@ -17,20 +19,45 @@ Function to extract words from a .txt file. For example a book from
 Project Gutenberg \url{http://www.gutenberg.org/wiki/Main_Page}.
 }
 \examples{
-\dontrun{
 library(PasswordGen)
 
-# Specify the name of a file that you already saved in your workind directory
-mybook <- "Project Gutenberg's The Adventures of Sherlock Holmes, 
-by Arthur Conan Doyle.txt"
+# Using the \\code{gutenbergr} R package we will download a book and 
+# extract words from it. Let's say, "The Adventures of Sherlock Holmes" by 
+# Doyle, Arthur Conan
 
-# Extract the unique words
-mywords <- ExtractWords(file = mybook, words.min.length = 3)
+library(gutenbergr)
+library(stringr)
+# look up book and check the id on Gutenberg Project
+info <- gutenberg_works(str_detect(title, "The Adventures of Sherlock Holmes"))
+info$gutenberg_id # this should be 1661
 
-# Generate password using my words from Sherlock Holmes book.
-password(data = mywords)
+# download the book
+my_book <- gutenberg_download(gutenberg_id = 1661, meta_fields = "title",
+                              mirror = "http://gutenberg.pglaf.org")
 
-password(no_words = 7, numbers = FALSE, symbols = FALSE, sep = ' ',
-         data = mywords)
-} 
+# Extract words
+words <- ExtractWords(data.r = my_book$text)
+words
+
+# Generate passwords
+password(no_words = 5, data = words)
+
+
+# -----------
+# Example 2 - Extract russian words and generate passwords
+
+# check the id of the book on Gutenberg Project
+info <- gutenberg_works(languages = 'ru')
+info # let's take the first id: 5316
+
+# download the book
+my_book <- gutenberg_download(gutenberg_id = 5316, meta_fields = "title",
+                              mirror = "http://gutenberg.pglaf.org")
+
+# Extract words
+words <- ExtractWords(data.r = my_book$text)
+
+password(no_words = 5, data = words,
+         numbers = FALSE, symbols = FALSE, sep = "-")
+
 }

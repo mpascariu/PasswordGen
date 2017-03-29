@@ -5,7 +5,7 @@
 \title{Function to generate secure readable passwords/passphrases}
 \usage{
 password(no_words = 3, symbols = TRUE, numbers = TRUE, sep = NULL,
-  data = Webster)
+  data = NULL)
 }
 \arguments{
 \item{no_words}{- Number of words to be used in the password}
