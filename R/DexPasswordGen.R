@@ -1,4 +1,3 @@
-
 #' Function to generate secure readable passwords/passphrases
 #' 
 #' @param no_words - Number of words to be used in the password
@@ -10,6 +9,7 @@
 #' @param data - words to be used in the password. In default mode the words from
 #' \href{http://www.gutenberg.org/ebooks/29765}{The Project Gutenberg EBook 
 #' of Webster's Unabridged Dictionary, by Various} are used (93077 words).
+#' @return A password.
 #' @examples 
 #' library(PasswordGen)
 #' 
@@ -52,14 +52,16 @@ password <- function(no_words = 3,
   return(Password)
 }
 
-#'
+
 #' @keywords internal
+#' 
 simpleCap <- function(x) {
   s <- strsplit(x, " ")[[1]]
   paste0(toupper(substring(s, 1,1)), substring(s, 2), collapse = " ")
 }
 
-# ---------
+
+
 #' Function to extract words from a .txt file
 #' 
 #' Function to extract words from a .txt file. For example a book from 
@@ -91,7 +93,6 @@ simpleCap <- function(x) {
 #' 
 #' # Generate passwords
 #' password(no_words = 5, data = words)
-#' 
 #' 
 #' # -----------
 #' # Example 2 - Extract russian words and generate passwords
@@ -144,7 +145,6 @@ ExtractWords <- function(data.txt = NULL,
 
 #' @keywords internal
 #' @export
-#' 
 print.ExtractWords <- function(x, ...){
   cat('\nFile: ', x$file)
   cat('\nNumber of unique words: ', length(x$words))

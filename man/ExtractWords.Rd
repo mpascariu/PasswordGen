@@ -42,7 +42,6 @@ words
 # Generate passwords
 password(no_words = 5, data = words)
 
-
 # -----------
 # Example 2 - Extract russian words and generate passwords
 

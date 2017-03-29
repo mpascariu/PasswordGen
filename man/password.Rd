@@ -22,6 +22,9 @@ If NULL a random symbol is selected.}
 \href{http://www.gutenberg.org/ebooks/29765}{The Project Gutenberg EBook 
 of Webster's Unabridged Dictionary, by Various} are used (93077 words).}
 }
+\value{
+A password.
+}
 \description{
 Function to generate secure readable passwords/passphrases
 }
