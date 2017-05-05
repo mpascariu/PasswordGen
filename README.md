@@ -67,7 +67,7 @@ after each word, no symbols, and separate them using a dash line.
 
 Generate a password using words from my favorite book.
 
-Using the R package we will download a book and extract words from it.
+Using the *gutenbergr* R package we will download a book and extract words from it.
 "The Adventures of Sherlock Holmes" by Doyle, Arthur Conan is a good
 choice.
 
