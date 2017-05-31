@@ -13,6 +13,7 @@ Suggests:
     stringr, 
     gutenbergr,
     knitr,
-    rmarkdown
+    rmarkdown,
+    tidyr
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
