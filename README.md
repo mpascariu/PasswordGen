@@ -1,4 +1,6 @@
 # PasswordGen R Package
+[![Build Status](https://travis-ci.org/mpascariu/PasswordGen.svg?branch=master)](https://travis-ci.org/mpascariu/PasswordGen)
+[![license](https://img.shields.io/github/license/mpascariu/PasswordGen.svg)]()
 
 Sometimes we need not only secure passwords but also passwords easy to
 remember. PasswordGen is an **R** package that helps you generates
