@@ -5,7 +5,7 @@ Version: 0.0.4
 Author: Marius Pascariu
 Maintainer: Marius Pascariu <mpascariu@outlook.com>
 Description: Generate readable secure password using the dictionary method.
-License: GPL-2
+License: GPL-3
 LazyData: TRUE
 Depends: R (>= 3.1.2)
 Imports: pbapply 
